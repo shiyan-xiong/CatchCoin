@@ -53,7 +53,7 @@
 ## 🚀 快速开始
 
 ### 方法一、在线访问
-本项目已在GitHub Pages发布，可通过以下链接访问：[在线访问`接金币`](https://shiyan-xiong.github.io/CatchCoin/)
+本项目已在GitHub Pages发布，可通过以下链接访问：[在线访问`接金币`](https://shiyan-xiong.github.io/catch-coin/)
 
 ### 方法二、本地运行
 1. 下载或克隆项目文件
