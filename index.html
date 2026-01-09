@@ -53,7 +53,7 @@
                 </div>
                 <div class="info-item">
                     <span class="label">漏接:</span>
-                    <span id="missedCoins">0</span>/10
+                    <span id="missedCoins">0</span>/50
                 </div>
                 <div class="info-divider"></div>
                 <div class="info-item">
@@ -78,10 +78,16 @@
                 <!-- 控制按钮 -->
                 <div class="controls">
                 <button id="playPauseBtn" class="btn icon-btn" title="开始/暂停">
-                    <svg class="icon" viewBox="0 0 24 24" fill="currentColor" stroke="none">
-                        <path id="playIcon" d="m5 3 14 9-14 9V3z" style="display: block;"/>
-                        <path id="pauseIcon" d="M6 4h4v16H6zm8 0h4v16h-4z" style="display: none; fill: currentColor; stroke: none;"/>
-                    </svg>
+                    <div class="icon-container">
+                        <!-- 开始图标 -->
+                        <svg id="playIcon" class="icon" viewBox="0 0 1024 1024" style="display: block;">
+                            <path d="M881.777778 381.155556l-512-284.444445C199.111111 0 113.777778 102.4 113.777778 227.555556v574.577777c0 170.666667 142.222222 199.111111 256 136.533334l512-284.444445c113.777778-68.266667 113.777778-216.177778 0-273.066666z" fill="currentColor"/>
+                        </svg>
+                        <!-- 暂停图标 -->
+                        <svg id="pauseIcon" class="icon" viewBox="0 0 1024 1024" style="display: none;">
+                            <path d="M881.720889 842.752c0 68.494222-50.915556 124.074667-113.777778 124.074667-62.748444 0-113.607111-55.409778-113.777778-123.790223l-0.056889-661.845333 0.056889-0.284444c0-68.494222 50.972444-124.074667 113.777778-124.074667 62.862222 0 113.777778 55.580444 113.777778 124.074667l-0.056889 2.958222v655.928889l0.056889 2.958222z m-455.111111 0c0 68.494222-50.858667 124.074667-113.720889 124.074667-62.748444 0-113.664-55.409778-113.777778-123.790223h-0.113778V181.191111H199.111111V180.906667c0-68.494222 50.915556-124.074667 113.777778-124.074667s113.777778 55.580444 113.777778 124.074667V842.752z" fill="currentColor"/>
+                        </svg>
+                    </div>
                 </button>
                 <button id="restartBtn" class="btn icon-btn" disabled title="重玩">
                     <svg class="icon" width="200px" height="199.80px" viewBox="0 0 1025 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">

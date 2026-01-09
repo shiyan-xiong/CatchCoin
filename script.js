@@ -14,30 +14,30 @@ const gameState = {
 // 主题配置
 const themes = {
     grassland: {
-        pageBg: '#87CEEB', // 天空蓝
-        gameAreaBg: '#a7f1a7ff', // 柔和草地绿
-        textColor: '#38e838ff', // 亮绿
+        pageBg: '#b0deefff', // 天空蓝
+        gameAreaBg: '#a7f1a788', // 半透明柔和草地绿
+        textColor: '#2F4F2F', // 深绿
         accentColor: '#FFD700', // 金色
-        iconColor: '#2F4F2F' // 深绿
+        iconColor: '#1E3A26' // 深绿
     },
     lavender: {
         pageBg: '#E6E6FA', // 淡紫
-        gameAreaBg: '#DDA0DD', // 薰衣草紫
-        textColor: '#9400D3', // 深紫
+        gameAreaBg: '#DDA0DD88', // 半透明薰衣草紫
+        textColor: '#4B0082', // 暗紫
         accentColor: '#8A2BE2', // 中紫
-        iconColor: '#4B0082' // 暗紫
+        iconColor: '#2E1065' // 深紫
     },
     night: {
         pageBg: '#0c0c0bff', // 黑色
-        gameAreaBg: '#1a1a1a', // 深灰
+        gameAreaBg: '#1a1a1a88', // 半透明深灰
         textColor: '#FFFFFF', // 白色
         accentColor: '#FFD700', // 金色
         iconColor: '#E0E0E0' // 浅灰
     },
     daydream: {
         pageBg: '#9fd4f0ff', // 淡蓝
-        gameAreaBg: '#FFF8DC', // 米白
-        textColor: '#87CEFA', // 天蓝
+        gameAreaBg: '#f2e5bae9', // 半透明米白
+        textColor: '#369ef3ff', // 钢蓝
         accentColor: '#FF69B4', // 粉红
         iconColor: '#6A5ACD' // 蓝紫
     }
@@ -389,8 +389,9 @@ function updateFallingItems() {
                 updateMissedCoins();
                 
                 // 检查游戏结束条件
-                if (gameState.missedCoins >= 10) {
+                if (gameState.missedCoins >= 50) {
                     gameOver();
+                    return; // 游戏结束后立即返回，不再处理后续物品
                 }
             }
             shouldRemove = true;
@@ -545,12 +546,16 @@ function applyTheme(themeName) {
     gameArea.style.background = theme.gameAreaBg;
     body.style.color = theme.textColor;
     
+    // 设置CSS变量，用于主题颜色
+    document.documentElement.style.setProperty('--accent-color', theme.accentColor);
+    document.documentElement.style.setProperty('--text-color', theme.textColor);
+    
     // 更新图标颜色
     iconBtns.forEach(btn => {
         btn.style.color = theme.iconColor;
         const icon = btn.querySelector('.icon');
         if (icon) {
-            icon.style.fill = theme.iconColor;
+            icon.style.fill = 'currentColor';
         }
     });
     
@@ -595,8 +600,8 @@ function updateIconColors() {
                 btn.style.color = iconColor;
                 const icon = btn.querySelector('.icon');
                 if (icon) {
-                    icon.style.fill = iconColor;
-                    icon.style.stroke = iconColor;
+                    icon.style.fill = 'currentColor';
+                    icon.style.stroke = 'currentColor';
                 }
             }
         });

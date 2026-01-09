@@ -29,11 +29,13 @@ body {
     display: flex;
     flex-direction: column;
     padding: 30px;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(10px);
     border-radius: 20px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-    transition: background 0.3s ease;
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.1),
+        0 0 0 1px rgba(255, 255, 255, 0.15);
+    transition: all 0.3s ease;
     max-width: 600px;
     width: 100%;
 }
@@ -44,12 +46,15 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 15px 25px;
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(8px);
     border-radius: 15px;
     margin-bottom: 20px;
     font-size: 18px;
     font-weight: 600;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 
+        0 4px 15px rgba(0, 0, 0, 0.1),
+        0 0 0 1px rgba(255, 255, 255, 0.15);
 }
 
 .info-item {
@@ -70,14 +75,14 @@ body {
 
 .label {
     color: #ffd700;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    text-shadow: none;
 }
 
-#score, #highScore, #speed {
-    color: #fff;
+#score, #highScore, #speed, #missedCoins {
+    color: inherit;
     min-width: 50px;
     text-align: right;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    text-shadow: none;
 }
 
 #speed {
@@ -98,10 +103,13 @@ body {
     width: 100%;
     aspect-ratio: 1;
     position: relative;
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
     border-radius: 15px;
     overflow: hidden;
-    box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 
+        inset 0 2px 10px rgba(0, 0, 0, 0.1),
+        0 0 0 1px rgba(255, 255, 255, 0.15);
 }
 
 /* 速度显示 */
@@ -112,23 +120,26 @@ body {
     display: flex;
     align-items: center;
     gap: 8px;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(8px);
     padding: 8px 15px;
     border-radius: 20px;
     font-size: 18px;
     font-weight: 600;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    box-shadow: 
+        0 4px 12px rgba(0, 0, 0, 0.1),
+        0 0 0 1px rgba(255, 255, 255, 0.15);
     z-index: 10;
 }
 
 .speed-display .label {
     color: #ffd700;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    text-shadow: none;
 }
 
 .speed-display #speed {
     color: #fff;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    text-shadow: none;
     min-width: 30px;
     text-align: left;
 }
@@ -146,7 +157,8 @@ body {
     align-items: center;
     justify-content: center;
     color: #8B4513; /* 棕色 */
-    text-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
+    text-shadow: none;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease;
 }
 
@@ -268,19 +280,22 @@ body {
     display: flex;
     align-items: center;
     gap: 8px;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(8px);
     padding: 8px 15px;
     border-radius: 20px;
     font-size: 18px;
     font-weight: 600;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    box-shadow: 
+        0 4px 12px rgba(0, 0, 0, 0.1),
+        0 0 0 1px rgba(255, 255, 255, 0.15);
     z-index: 10;
 }
 
 /* 控制按钮 */
 .controls {
     display: flex;
-    gap: 15px;
+    gap: 20px;
 }
 
 .btn {
@@ -326,24 +341,84 @@ body {
     justify-content: center;
     border-radius: 50%;
     border: none;
-    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     transition: all 0.3s ease;
+    position: relative;
+    overflow: visible;
 }
 
-.icon-btn .icon, .icon-btn canvas {
-    width: 28px;
-    height: 28px;
+.icon-btn::before {
+    content: none;
+}
+
+.icon-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    background: rgba(255, 255, 255, 0.3);
+    animation: none;
+}
+
+.icon-btn:active:not(:disabled) {
+    transform: translateY(0);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* 开始/暂停按钮特殊样式 */
+#playPauseBtn {
+    background: rgba(255, 255, 255, 0.2);
+    color: currentColor;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+#playPauseBtn:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* 重玩按钮特殊样式 */
+#restartBtn {
+    background: rgba(255, 255, 255, 0.2);
+    color: currentColor;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+#restartBtn:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.icon-btn .icon-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.icon-btn .icon, .icon-btn canvas, .icon-btn img.icon {
+    width: 90px;
+    height: 90px;
     fill: currentColor;
-    stroke: currentColor;
-    stroke-linecap: round;
-    stroke-linejoin: round;
+    stroke: none;
     filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.3));
-    transition: transform 0.2s ease;
+    transition: all 0.3s ease;
     display: block;
+    position: static;
+    z-index: auto;
+    object-fit: contain;
 }
 
-.icon-btn:hover .icon, .icon-btn:hover canvas {
+.icon-btn:hover .icon, .icon-btn:hover canvas, .icon-btn:hover img.icon {
     transform: scale(1.1);
+}
+
+/* 确保SVG图标颜色随主题变化 */
+.icon-btn svg path {
+    fill: currentColor;
+    stroke: none;
 }
 
 /* 设置按钮的齿轮图标 */
@@ -387,13 +462,13 @@ body {
     right: -350px;
     width: 320px;
     height: 100vh;
-    background: rgba(0, 0, 0, 0.95);
+    background: rgba(0, 0, 0, 0.85);
     backdrop-filter: blur(20px);
     padding: 30px;
     transition: right 0.3s ease;
     z-index: 200;
     overflow-y: auto;
-    box-shadow: -5px 0 20px rgba(0, 0, 0, 0.3);
+    box-shadow: -5px 0 20px rgba(0, 0, 0, 0.2);
 }
 
 .settings-panel.open {
@@ -533,7 +608,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(10px);
     display: flex;
     justify-content: center;
@@ -543,11 +618,11 @@ body {
 }
 
 .game-over-content {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(20px);
     padding: 40px;
     border-radius: 20px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
     text-align: center;
     color: #fff;
     max-width: 400px;
@@ -558,22 +633,23 @@ body {
 .game-over-content h2 {
     font-size: 32px;
     margin-bottom: 15px;
-    color: #ff6b6b;
-    text-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+    color: inherit;
+    text-shadow: none;
 }
 
 .game-over-content p {
     font-size: 18px;
     margin-bottom: 25px;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    color: inherit;
+    text-shadow: none;
 }
 
 .final-score {
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 30px;
-    color: #ffd700;
-    text-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+    color: var(--accent-color, #ffd700);
+    text-shadow: none;
 }
 
 .final-score span {
